@@ -4,6 +4,7 @@
 
 An agent which reads emails from the last one day and summarizes them. It highlights key points and action items.
 
+
 ## Pre-requisites
 
 *   python
@@ -11,6 +12,9 @@ An agent which reads emails from the last one day and summarizes them. It highli
 *   GCP account/project (I used cloudrun & GKE autopilot cluster)
 *   OpenRouter and any LLM provider
 *   Cloudflare account with a domain name
+
+> This project requires a good understanding of Python, Google Cloud Platform (GCP), Large Language Models (LLMs), RESTful APIs and Cloudflare.
+
 
 ## Solution #1: Custom Python Solution
 
