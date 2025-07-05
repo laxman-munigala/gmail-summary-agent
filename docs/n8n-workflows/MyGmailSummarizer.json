@@ -1,0 +1,159 @@
+{
+  "name": "MyGmailSummarizer",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "getAll",
+        "filters": {
+          "q": "newer_than:1d AND category:UPDATES"
+        }
+      },
+      "id": "2770e6f5-75cf-4e85-9222-2ebd27952d2f",
+      "name": "Fetch Emails - Past 24 Hours",
+      "type": "n8n-nodes-base.gmail",
+      "position": [
+        660,
+        340
+      ],
+      "webhookId": "20f1d11d-8a69-43f3-9323-33eaf1b3b600",
+      "typeVersion": 2.1,
+      "alwaysOutputData": true,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "3nIKP3wZT8X9p2KP",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\n// for (const item of $input.all()) {\n//   item.json.myNewField = 1;\n// }\n\n// return $input.all();\n\nconst forItems = $input.all().map(item => {\n  const timestamp = parseInt(item.json.internalDate, 10);\n\n  // Create a new Date object from the timestamp\n  const dateObj = new Date(timestamp);\n  \n    return `FROM: ${item.json.From}\n    TO: ${item.json.To}\n    SUBJECT: ${item.json.Subject}\n    DATE/TIME: ${dateObj.toLocaleString('en-US',{timeZone: 'America/New_York'})}\n    BODY: ${item.json.snippet}\n    ------------------------------------------`;\n  })\n\nfor(const item in forItems) {\n  console.log(item)\n}\n\nreturn {\n  'output': forItems.join('\\n')\n}\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        880,
+        340
+      ],
+      "id": "b2297a32-ddd8-4145-8a04-c90397ad4aa4",
+      "name": "Code"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        400,
+        340
+      ],
+      "id": "8b4d930a-71b7-4b71-b514-7f8c02ae01c4",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=    # Daily Email Summary Assistant\n\n    You are an expert email analyst tasked with creating comprehensive daily email summaries. You will receive a collection of emails from the previous day and must provide a structured, actionable report.\n\n    ## Instructions\n\n    Analyze all provided emails and create a well-organized summary report with the following sections:\n\n    ### 1. Executive Summary\n    Provide a brief overview (2-3 sentences) of the day's email activity, highlighting the main themes and overall volume.\n\n    ### 2. Key Highlights\n    - **Important Business Communications**: Summarize critical work-related emails, decisions, announcements, or updates\n    - **Personal Messages**: Highlight significant personal communications from family, friends, or personal contacts\n    - **Time-Sensitive Items**: Flag any emails with deadlines, appointments, or urgent matters\n    - **Notable Updates**: Include important news, confirmations, or status updates\n\n    ### 3. Action Items Required\n    List all emails that require follow-up action, organized by priority:\n    - **High Priority** (immediate action needed)\n    - **Medium Priority** (action needed within a few days)\n    - **Low Priority** (follow-up when convenient)\n\n    For each action item, include:\n    - What action is needed\n    - Who it involves\n    - Any relevant deadline or timeframe\n\n    ### 4. Email Inventory Table\n\n    Create a comprehensive table with the following columns:\n    | Sender | Subject/Description | Date & Time | Priority Level | Action Required |\n    |--------|-------------------|-------------|----------------|-----------------|\n\n    **Column Guidelines:**\n    - **Sender**: Full name or email address\n    - **Subject/Description**: Original subject line or one-line summary if subject is unclear\n    - **Date & Time**: Full timestamp (MM/DD/YYYY HH:MM AM/PM)\n    - **Priority Level**: High/Medium/Low based on content importance\n    - **Action Required**: Yes/No, with brief description if yes\n\n    ## Important Guidelines\n\n    1. **Completeness**: Do not skip or overlook any emails, regardless of apparent importance\n    2. **Accuracy**: Preserve key details, names, dates, and specific information\n    3. **Context**: Identify the nature of each email (work, personal, promotional, etc.)\n    4. **Urgency Detection**: Flag time-sensitive content, deadlines, and requests for responses\n    5. **Privacy Sensitivity**: Handle personal information appropriately while maintaining summary usefulness\n\n    ## Format Requirements\n\n    - Use clear headings and bullet points for easy scanning\n    - Keep summaries concise but informative\n    - Maintain professional tone throughout\n    - Ensure the table is properly formatted and sortable\n    - Include total email count at the beginning\n\n    ## Output Structure\n\n    ```\n    # Daily Email Summary Report\n    ## Executive Summary\n    [2-3 sentence overview]\n\n    ## Key Highlights\n    [Organized highlights as specified above]\n\n    ## Action Items Required\n    [Prioritized action items]\n\n    ## Email Inventory Table\n    [Complete table as specified]\n    ```\n\n    ## Email Data Input\n\n    Please analyze the following emails:\n\n    ```\n    {{ $json.output }}\n\n    Format for each email:\n    ------------------------------------------\n    FROM: [Sender Name/Email]\n    TO: [Recipient]\n    SUBJECT: [Subject Line]\n    DATE/TIME: [Full Timestamp]\n    BODY: [Full Email Content]\n    ------------------------------------------\n    ```\n\n    Remember: Your goal is to ensure nothing important is missed while providing a clear, actionable summary that saves time and improves email management efficiency.",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        1100,
+        340
+      ],
+      "id": "7a7580c4-ed31-4188-a688-0aeb4bc877bc",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "model": "google/gemini-2.5-flash-lite-preview-06-17",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        1180,
+        560
+      ],
+      "id": "d00bc376-a0a9-44eb-9df2-57c036a3f3d1",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "kepyoBIo011Wqhl3",
+          "name": "OpenRouter account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Fetch Emails - Past 24 Hours": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Fetch Emails - Past 24 Hours",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "4effdf90-dcbc-45ab-b154-032ee6437b0b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9a4edeef11d543780b9f2a0406f112735f1dddaeaee15b20de7cbe7c929aacdc"
+  },
+  "id": "kHelOnkirCW9xcrM",
+  "tags": [
+    {
+      "createdAt": "2025-07-05T15:07:06.438Z",
+      "updatedAt": "2025-07-05T15:07:06.438Z",
+      "id": "plxvN6y9lzo0FQeT",
+      "name": "AI"
+    },
+    {
+      "name": "gmail",
+      "id": "tEO8lLC6bIhZYZY9",
+      "createdAt": "2025-07-05T19:20:59.260Z",
+      "updatedAt": "2025-07-05T19:20:59.260Z"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+docker build -t us-east4-docker.pkg.dev/<<GCP-PROJECT-ID>>/<<GCP-artifact-repo>>/<<gmailsummaryimage>> -f ./dockerfile .
+docker push us-east4-docker.pkg.dev/<<GCP-PROJECT-ID>>/<<GCP-artifact-repo>>/<<gmailsummaryimage>>:latest
+
+gcloud secrets create private_config_token --labels=env=production,config_type=private
+gcloud secrets versions add private_config_token --data-file=./private_config/token.json 
+
+gcloud run jobs create my-cloud-run-gmail-job \
+  --image us-east4-docker.pkg.dev/<<GCP-PROJECT-ID>>/<<GCP-artifact-repo>>/<<gmailsummaryimage>> \
+  --region us-east4 \
+  --tasks 1 \
+  --cpu 1 \
+  --memory 1Gi \
+  --service-account <<GCP-Service-Account>>@<<GCP-PROJECT-ID>>.iam.gserviceaccount.com \
+  --set-env-vars TZ=America/New_York 
+
+gcloud run jobs update my-cloud-run-gmail-job --region us-east4 --update-secrets=/app/private_config/token.json=private_config_token:latest
+gcloud run jobs update my-cloud-run-gmail-job --region us-east4 --set-env-vars=OPENROUTER_API_KEY=<<sk-or-v1-sdfsf>>,gmail_credential_folder=/app/private_config/
+
+
+sudo apt-get install google-cloud-cli-gke-gcloud-auth-plugin
+gcloud container clusters get-credentials <<GCP-GKE-CLUSTER-NAME>> --location "us-east4"
+kubectl config view
+kubectl get pods
+kubectl get namespaces
+
+kubectl create secret generic n8n-tunnel-secret --from-literal=token=<YOUR_TUNNEL_TOKEN>
+
+kubectl apply -f data-local/deploy/n8n-pvc.yaml
+kubectl apply -f data-local/deploy/n8n-deployment.yaml
+kubectl apply -f data-local/deploy/cf-tunnel-deployment.yaml
+
+kubectl delete deployment cloudflared-deployment
+kubectl delete deployment n8n-deployment

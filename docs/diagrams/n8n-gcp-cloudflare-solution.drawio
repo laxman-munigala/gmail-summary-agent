@@ -1,0 +1,67 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36" version="27.2.0">
+  <diagram name="Page-1" id="BcxlFC-3C4FdRSaDg3so">
+    <mxGraphModel dx="1425" dy="817" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ft_s4oXzT1HU8oXa9gW0-2" value="Cloudflare" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=17;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="170" y="180" width="331" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="ft_s4oXzT1HU8oXa9gW0-3" value="DNS" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="201" y="235" width="70" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="ft_s4oXzT1HU8oXa9gW0-14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ft_s4oXzT1HU8oXa9gW0-4" target="ft_s4oXzT1HU8oXa9gW0-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ft_s4oXzT1HU8oXa9gW0-4" value="Access Policy" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="311" y="235" width="70" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="ft_s4oXzT1HU8oXa9gW0-6" value="Google Cloud (GKE)" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=17;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="611" y="162" width="410" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="ft_s4oXzT1HU8oXa9gW0-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ft_s4oXzT1HU8oXa9gW0-5" target="ft_s4oXzT1HU8oXa9gW0-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ft_s4oXzT1HU8oXa9gW0-5" value="Tunnel" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="411" y="235" width="70" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="ft_s4oXzT1HU8oXa9gW0-17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ft_s4oXzT1HU8oXa9gW0-7" target="ft_s4oXzT1HU8oXa9gW0-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ft_s4oXzT1HU8oXa9gW0-7" value="Cloudflared&lt;br&gt;Tunnel Abent" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="641" y="224.5" width="70" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="ft_s4oXzT1HU8oXa9gW0-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ft_s4oXzT1HU8oXa9gW0-8" target="ft_s4oXzT1HU8oXa9gW0-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ft_s4oXzT1HU8oXa9gW0-8" value="n8n pods" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="891" y="192" width="100" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="ft_s4oXzT1HU8oXa9gW0-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ft_s4oXzT1HU8oXa9gW0-9" target="ft_s4oXzT1HU8oXa9gW0-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ft_s4oXzT1HU8oXa9gW0-9" value="n8n Service" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="741" y="224.5" width="70" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="ft_s4oXzT1HU8oXa9gW0-10" value="SQLite DB&lt;br&gt;Persistent Disk" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="893" y="282" width="95" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ft_s4oXzT1HU8oXa9gW0-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ft_s4oXzT1HU8oXa9gW0-11" target="ft_s4oXzT1HU8oXa9gW0-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ft_s4oXzT1HU8oXa9gW0-11" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="220" width="30" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="ft_s4oXzT1HU8oXa9gW0-13" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="ft_s4oXzT1HU8oXa9gW0-3" target="ft_s4oXzT1HU8oXa9gW0-4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="630" as="sourcePoint" />
+            <mxPoint x="450" y="580" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ft_s4oXzT1HU8oXa9gW0-21" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;Cloudflare&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;&lt;ol&gt;&lt;li style=&quot;text-align: left;&quot;&gt;DNS provider&lt;/li&gt;&lt;li&gt;&lt;div style=&quot;text-align: left;&quot;&gt;Access policy for end point , to authenticate/authorize&lt;/div&gt;&lt;/li&gt;&lt;li&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;For Access policy uses OTP and &quot;allowed list of emails only&quot;&lt;/span&gt;&lt;/div&gt;&lt;/li&gt;&lt;li&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;The requests are tunnel&#39;d to GCP (reverse proxy/agent on GCP; no need to expose any public ip on GCP/GKE&lt;/span&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;b&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Google Cloud (GKE)&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;ol&gt;&lt;li&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Deployed docker n8n image on GKE, used sqlite db (storage as persistent volume attached to GKE cluster)&lt;/span&gt;&lt;/li&gt;&lt;li&gt;Configured service (CLuster IP; internal only endpoint)&lt;/li&gt;&lt;li&gt;Deployed cloudflared tunnel agent (reverse proxy) on GKE&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="241" y="400" width="650" height="200" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
